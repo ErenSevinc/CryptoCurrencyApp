@@ -53,6 +53,7 @@ data class CoinDetailResponseModel(
         return CoinDetailDataModel(
             id = id ?: "",
             name = name ?: "",
+            image = image ?: Image(),
             marketData = marketData ?: MarketData(),
             description = description ?: Description(),
             statusUpdates = statusUpdates ?: arrayListOf<String>(),
