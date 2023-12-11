@@ -12,13 +12,13 @@ data class CoinListItem(
     @SerializedName("atl_date") val atl_date: String ?= null,
     @SerializedName("circulating_supply") val circulating_supply: Double ?= null,
     @SerializedName("current_price") val current_price: Double ?= null,
-    @SerializedName("fully_diluted_valuation") val fully_diluted_valuation: Long ?= null,
+    @SerializedName("fully_diluted_valuation") val fully_diluted_valuation: Double ?= null,
     @SerializedName("high_24h") val high_24h: Double ?= null,
     @SerializedName("id") val id: String ?= null,
     @SerializedName("image") val image: String ?= null,
     @SerializedName("last_updated") val last_updated: String ?= null,
     @SerializedName("low_24h") val low_24h: Double ?= null,
-    @SerializedName("market_cap") val market_cap: Long ?= null,
+    @SerializedName("market_cap") val market_cap: Double ?= null,
     @SerializedName("market_cap_change_24h") val market_cap_change_24h: Double ?= null,
     @SerializedName("market_cap_change_percentage_24h") val market_cap_change_percentage_24h: Double ?= null,
     @SerializedName("market_cap_rank") val market_cap_rank: Int,
@@ -29,7 +29,7 @@ data class CoinListItem(
     @SerializedName("roi") val roi: Roi ?= null,
     @SerializedName("symbol") val symbol: String ?= null,
     @SerializedName("total_supply") val total_supply: Double ?= null,
-    @SerializedName("total_volume") val total_volume: Long ?= null
+    @SerializedName("total_volume") val total_volume: Double ?= null
 ) {
     fun toCoinDataModel(): CoinDataModel {
         return CoinDataModel(
@@ -37,7 +37,7 @@ data class CoinListItem(
             symbol = symbol ?: "",
             name = name ?: "",
             image = image ?: "",
-            market_cap = market_cap ?: 0.toLong(),
+            market_cap = market_cap ?: 0.toDouble(),
             price = current_price ?: 0.toDouble(),
             price_percentage_change = price_change_percentage_24h ?: 0.toDouble(),
             low_price = low_24h ?: 0.toDouble(),

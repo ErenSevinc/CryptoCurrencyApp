@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.cyrptocurrencyapp.R
 import com.example.cyrptocurrencyapp.data.model.CoinDataModel
 import com.example.cyrptocurrencyapp.databinding.ItemCoinListBinding
+import com.example.cyrptocurrencyapp.ui.list.CoinListFragmentDirections
 
 class CoinListAdapter() : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolder>() {
 
@@ -54,6 +56,11 @@ class CoinListAdapter() : RecyclerView.Adapter<CoinListAdapter.CoinListViewHolde
                 binding.coinLevelButton.setBackgroundColor(binding.root.context.getColor(R.color.low_red))
             } else {
                 binding.coinLevelButton.setBackgroundColor(binding.root.context.getColor(R.color.high_green))
+            }
+
+            binding.root.setOnClickListener {
+                val action = CoinListFragmentDirections.navigateToDetail(coinId = item.id)
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }
