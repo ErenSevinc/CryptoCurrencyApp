@@ -3,6 +3,7 @@ package com.example.cyrptocurrencyapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.navigation.findNavController
 import com.example.cyrptocurrencyapp.R
 import com.example.cyrptocurrencyapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,15 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mainViewModel.getAllCoin("1")
-        setupObserver()
+
+        //val navController = findNavController(R.id.container)
     }
 
-    private fun setupObserver() {
-        mainViewModel.allCoin.observe(this) {
-            it?.let { list->
-                binding.textView.text = list.first().name
-            }
-        }
-    }
+
+
 }
