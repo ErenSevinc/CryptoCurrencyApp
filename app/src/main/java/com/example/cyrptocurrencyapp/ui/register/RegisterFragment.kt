@@ -12,6 +12,7 @@ import com.example.cyrptocurrencyapp.databinding.FragmentRegisterBinding
 import com.example.cyrptocurrencyapp.ui.login.LoginFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +49,11 @@ class RegisterFragment : Fragment() {
 
         auth.createUserWithEmailAndPassword(mail,password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                Toast.makeText(requireContext(),"Register Successful",Toast.LENGTH_LONG).show()
+                val profileUpdates = userProfileChangeRequest {
+                    displayName = name
+                }
+                auth.currentUser?.updateProfile(profileUpdates)
+                Toast.makeText(requireContext(),"Wlcome $name",Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
             } else {
                 Toast.makeText(requireContext(),"Error",Toast.LENGTH_LONG).show()

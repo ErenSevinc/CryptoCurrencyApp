@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
+
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.cyrptocurrencyapp.ui.login.LoginFragment"
@@ -42,5 +44,17 @@
             app:argType="string"
             app:nullable="false"
             android:defaultValue="eren" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.cyrptocurrencyapp.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/navigateToLogin"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/navigateToCoinList"
+            app:destination="@id/coinListFragment" />
     </fragment>
 </navigation>

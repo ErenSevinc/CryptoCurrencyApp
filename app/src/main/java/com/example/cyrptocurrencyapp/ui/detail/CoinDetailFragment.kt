@@ -22,6 +22,8 @@ class CoinDetailFragment : Fragment() {
     private lateinit var binding: FragmentCoinDetailBinding
     private val viewModel by viewModels<CoinDetailViewModel>()
     private val args: CoinDetailFragmentArgs by navArgs()
+    // TODO Timer
+    var default = 30000L
 
 
     override fun onCreateView(
