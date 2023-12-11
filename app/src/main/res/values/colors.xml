@@ -9,4 +9,5 @@
     <color name="accept_gray">#CCD1D1</color>
     <color name="low_red">#E74C3C</color>
     <color name="high_green">#2ECC71</color>
+    <color name="bg_tab">#212F3D</color>
 </resources>

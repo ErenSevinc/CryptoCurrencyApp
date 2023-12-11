@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "583694982465",
+    "project_id": "cryptocurrencyproject-fdbee",
+    "storage_bucket": "cryptocurrencyproject-fdbee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583694982465:android:b51bac77040564993f55c0",
+        "android_client_info": {
+          "package_name": "com.example.cyrptocurrencyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjsJGNTtLbeyy8QG4YDW2ruFuxK8m-H94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

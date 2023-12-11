@@ -3,7 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/coinListFragment">
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.cyrptocurrencyapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/navigateToRegister"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/navigateToAllList"
+            app:destination="@id/coinListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.cyrptocurrencyapp.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register"/>
+
     <fragment
         android:id="@+id/coinListFragment"
         android:name="com.example.cyrptocurrencyapp.ui.list.CoinListFragment"
