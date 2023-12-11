@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cyrptocurrencyapp.R
 import com.example.cyrptocurrencyapp.databinding.FragmentCoinListBinding
+import com.example.cyrptocurrencyapp.presentation.adapter.CoinListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CoinListFragment : Fragment() {
 
     private lateinit var binding: FragmentCoinListBinding
+    private lateinit var adapter: CoinListAdapter
     private val viewModel by viewModels<CoinListViewModel>()
 
 
@@ -35,7 +38,12 @@ class CoinListFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.allCoin.observe(viewLifecycleOwner) {
-            binding.textView.text = it.first().id
+            it?.let {list ->
+                adapter = CoinListAdapter()
+                adapter.setItems(list)
+                binding.rvCoinList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false)
+                binding.rvCoinList.adapter = adapter
+            }
         }
     }
 

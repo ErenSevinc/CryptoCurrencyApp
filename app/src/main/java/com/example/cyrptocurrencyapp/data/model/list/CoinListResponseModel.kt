@@ -34,7 +34,8 @@ data class CoinListItem(
     fun toCoinDataModel(): CoinDataModel {
         return CoinDataModel(
             id = id ?: "",
-            name= name ?: "",
+            symbol = symbol ?: "",
+            name = name ?: "",
             image = image ?: "",
             market_cap = market_cap ?: 0.toLong(),
             price = current_price ?: 0.toDouble(),
