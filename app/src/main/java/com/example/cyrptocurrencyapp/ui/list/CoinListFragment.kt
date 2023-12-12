@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cyrptocurrencyapp.databinding.FragmentAllCoinBinding
 import com.example.cyrptocurrencyapp.presentation.adapter.CoinListAdapter
 import com.example.cyrptocurrencyapp.ui.list.allCoin.AllCoinViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +22,6 @@ class CoinListFragment : Fragment() {
     private lateinit var binding: FragmentAllCoinBinding
     private lateinit var adapter: CoinListAdapter
     private val viewModel by viewModels<AllCoinViewModel>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

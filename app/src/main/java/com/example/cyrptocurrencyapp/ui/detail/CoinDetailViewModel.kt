@@ -9,6 +9,8 @@ import com.example.cyrptocurrencyapp.data.model.CoinDetailDataModel
 import com.example.cyrptocurrencyapp.domain.useCase.GetAllCoinUseCase
 import com.example.cyrptocurrencyapp.domain.useCase.GetSelectedCoinUseCase
 import com.example.cyrptocurrencyapp.utils.ResponseState
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,8 +30,13 @@ class CoinDetailViewModel @Inject constructor(
     private var _errorMessage = MutableLiveData<String>("")
     val errorMessage: LiveData<String> = _errorMessage
 
+    private var _isFav = MutableLiveData<Boolean?>(null)
+    val isFav: LiveData<Boolean?> = _isFav
 
-    fun getSelectedCoin(id: String) {
+    val favDocument = MutableLiveData<QueryDocumentSnapshot?>(null)
+
+
+    fun getSelectedCoin(id: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             getSelectedCoinUseCase.invoke(id).collect {
                 when (it) {
@@ -46,6 +53,18 @@ class CoinDetailViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+
+    fun checkFavourite(coinId: String, result: QuerySnapshot) {
+        val filter = result.firstOrNull {
+            it.data["id"] == coinId
+        }
+        _isFav.postValue(filter != null)
+
+        if (filter != null) {
+            favDocument.postValue(filter)
         }
     }
 }

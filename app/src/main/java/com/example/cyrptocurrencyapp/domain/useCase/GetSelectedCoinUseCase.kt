@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetSelectedCoinUseCase @Inject constructor(
     private val apiRepository: ApiRepository
 ) {
-    operator fun invoke(id: String): Flow<ResponseState<CoinDetailDataModel>> = flow {
+    operator fun invoke(id: String?): Flow<ResponseState<CoinDetailDataModel>> = flow {
         try {
             emit(ResponseState.Loading())
             val coinDetail = apiRepository.getSelectedCoin(id).toCoinDetail()

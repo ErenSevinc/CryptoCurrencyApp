@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 interface ApiRepository {
      suspend fun getAllCoin(page :String?) : MutableList<CoinListItem>
-     suspend fun getSelectedCoin(id: String): CoinDetailResponseModel
+     suspend fun getSelectedCoin(id: String?): CoinDetailResponseModel
 }

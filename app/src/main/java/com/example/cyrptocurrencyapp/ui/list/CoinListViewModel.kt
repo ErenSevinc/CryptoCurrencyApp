@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cyrptocurrencyapp.data.model.CoinDataModel
 import com.example.cyrptocurrencyapp.domain.useCase.GetAllCoinUseCase
 import com.example.cyrptocurrencyapp.utils.ResponseState
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

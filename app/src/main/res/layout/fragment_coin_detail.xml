@@ -54,12 +54,13 @@
         app:layout_constraintTop_toBottomOf="@id/coin_name"
         tools:text="+1.255555" />
 
-    <Button
+    <ImageButton
         android:id="@+id/favourite_button"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/accept_gray"
+        android:visibility="gone"
+        android:src="@drawable/ic_star_border"
         app:layout_constraintEnd_toEndOf="@id/coin_price"
         app:layout_constraintStart_toStartOf="@id/coin_name"
         app:layout_constraintTop_toBottomOf="@id/coin_percent_price" />

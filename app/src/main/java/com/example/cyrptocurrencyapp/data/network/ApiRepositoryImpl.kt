@@ -12,7 +12,7 @@ class ApiRepositoryImpl @Inject constructor(
         return apiService.getAllCoin(page = page)
     }
 
-    override suspend fun getSelectedCoin(id: String): CoinDetailResponseModel {
+    override suspend fun getSelectedCoin(id: String?): CoinDetailResponseModel {
         return apiService.getSelectedCoin(id)
     }
 }

@@ -14,5 +14,5 @@ interface ApiService {
     ) : MutableList<CoinListItem>
 
     @GET("/api/v3/coins/{id}")
-    suspend fun getSelectedCoin(@Path("id") id:String ): CoinDetailResponseModel
+    suspend fun getSelectedCoin(@Path("id") id:String?): CoinDetailResponseModel
 }
