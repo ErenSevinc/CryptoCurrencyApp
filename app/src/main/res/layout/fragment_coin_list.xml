@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/accept_yellow"
         android:text="Show Favourites"
+        android:visibility="gone"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/description_title"
         app:layout_constraintStart_toStartOf="@id/description_title" />
@@ -50,10 +51,11 @@
         android:iconifiedByDefault="false"
         android:queryBackground="@color/white"
         android:queryHint="Search Coin"
-        android:visibility="visible"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_favourite" />
+        app:layout_constraintTop_toBottomOf="@id/button_sign_out" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_coin_list"
@@ -66,7 +68,8 @@
         android:background="@color/bg_black"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:visibility="visible"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,5 +77,28 @@
         app:layout_constraintTop_toBottomOf="@id/filterLayout"
         tools:itemCount="6"
         tools:listitem="@layout/item_coin_list" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Error!!!"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

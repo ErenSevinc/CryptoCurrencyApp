@@ -41,15 +41,16 @@ class CoinDetailViewModel @Inject constructor(
             getSelectedCoinUseCase.invoke(id).collect {
                 when (it) {
                     is ResponseState.Loading -> {
-
-                    }
-
-                    is ResponseState.Error -> {
-
+                        _isLoading.postValue(true)
                     }
 
                     is ResponseState.Success -> {
+                        _isLoading.postValue(false)
                         _selectedCoin.postValue(it.data)
+                    }
+
+                    else -> {
+
                     }
                 }
             }

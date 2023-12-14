@@ -22,9 +22,6 @@ class FavCoinViewModel @Inject constructor() : ViewModel() {
     private var _isLoading = MutableLiveData<Boolean>(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private var _errorMessage = MutableLiveData<String?>(null)
-    val errorMessage: LiveData<String?> = _errorMessage
-
     fun checkFavourite(coinList: MutableList<CoinDataModel>, result: QuerySnapshot) {
         val list = mutableListOf<CoinDataModel>()
         coinList.forEach { coin ->
@@ -35,10 +32,6 @@ class FavCoinViewModel @Inject constructor() : ViewModel() {
             }
         }
         _isLoading.value = false
-
-        if (list.isEmpty()) {
-            _errorMessage.postValue("You don't have favourite coin.")
-        }
         _favCoins.postValue(list)
 
     }

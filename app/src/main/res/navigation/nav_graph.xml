@@ -10,10 +10,14 @@
         android:id="@+id/loginFragment"
         android:name="com.example.cyrptocurrencyapp.ui.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/navigateToRegister"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />/>
         <action
             android:id="@+id/navigateToAllList"
             app:destination="@id/coinListFragment"
@@ -27,13 +31,13 @@
         android:id="@+id/registerFragment"
         android:name="com.example.cyrptocurrencyapp.ui.register.RegisterFragment"
         android:label="Register"
-        tools:layout="@layout/fragment_register"/>
+        tools:layout="@layout/fragment_register" />
 
     <fragment
         android:id="@+id/coinListFragment"
         android:name="com.example.cyrptocurrencyapp.ui.list.CoinListFragment"
         android:label="Coin List"
-        tools:layout="@layout/fragment_coin_list" >
+        tools:layout="@layout/fragment_coin_list">
         <action
             android:id="@+id/navigateToDetail"
             app:destination="@id/coinDetailFragment"
@@ -43,7 +47,11 @@
             app:popExitAnim="@anim/slide_to_right" />
         <action
             android:id="@+id/navigateToFavCoin"
-            app:destination="@id/favCoinFragment" />
+            app:destination="@id/favCoinFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />/>
         <action
             android:id="@+id/navigateToSplash"
             app:destination="@id/splashFragment" />
@@ -52,35 +60,48 @@
         android:id="@+id/coinDetailFragment"
         android:name="com.example.cyrptocurrencyapp.ui.detail.CoinDetailFragment"
         android:label="Coin Detail"
-        tools:layout="@layout/fragment_coin_detail" >
+        tools:layout="@layout/fragment_coin_detail">
         <argument
             android:name="coinId"
+            android:defaultValue="eren"
             app:argType="string"
-            app:nullable="false"
-            android:defaultValue="eren" />
+            app:nullable="false" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.cyrptocurrencyapp.ui.splash.SplashFragment"
         android:label="Splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/navigateToLogin"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />/>
         <action
             android:id="@+id/navigateToCoinList"
-            app:destination="@id/coinListFragment" />
+            app:destination="@id/coinListFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />/>
     </fragment>
     <fragment
         android:id="@+id/favCoinFragment"
         android:name="com.example.cyrptocurrencyapp.ui.list.favCoin.FavCoinFragment"
         android:label="Favourites"
-        tools:layout="@layout/fragment_fav_coin" >
+        tools:layout="@layout/fragment_fav_coin">
         <action
             android:id="@+id/navigateToDetailFromFav"
-            app:destination="@id/coinDetailFragment"/>
+            app:destination="@id/coinDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />/>
         <argument
             android:name="allCoin"
-            app:argType="com.example.cyrptocurrencyapp.data.model.CoinListDataModel" />
+            app:argType="com.example.cyrptocurrencyapp.data.model.CoinListDataModel"
+            app:nullable="true" />
     </fragment>
 </navigation>

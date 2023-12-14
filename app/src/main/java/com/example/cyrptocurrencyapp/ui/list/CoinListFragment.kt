@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -60,7 +61,7 @@ class CoinListFragment : Fragment() {
         binding.descriptionTitle.text = "Welcome ${user.currentUser!!.displayName}"
 
         binding.buttonFavourite.setOnClickListener {
-            val direction = CoinListFragmentDirections.navigateToFavCoin(CoinListDataModel(coinList))
+            val direction = CoinListFragmentDirections.navigateToFavCoin(CoinListDataModel(coinList)?: null)
             findNavController().navigate(direction)
         }
         binding.buttonSignOut.setOnClickListener {
@@ -104,12 +105,27 @@ class CoinListFragment : Fragment() {
     private fun setupObservers() {
         viewModel.allCoin.observe(viewLifecycleOwner) {
             it?.let {list ->
+                binding.rvCoinList.isVisible = list.isNotEmpty()
+                binding.filterLayout.isVisible = list.isNotEmpty()
+                binding.tvError.isVisible = list.isEmpty()
+                binding.buttonFavourite.isVisible = list.isNotEmpty()
+
                 adapter = CoinListAdapter(PageType.LIST)
                 adapter.setItems(list)
                 coinList = it
                 binding.rvCoinList.layoutManager = LinearLayoutManager(context,
                     LinearLayoutManager.VERTICAL, false)
                 binding.rvCoinList.adapter = adapter
+            }
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.buttonFavourite.isVisible = false
+                binding.tvError.isVisible = true
+                binding.tvError.text = it
             }
         }
     }

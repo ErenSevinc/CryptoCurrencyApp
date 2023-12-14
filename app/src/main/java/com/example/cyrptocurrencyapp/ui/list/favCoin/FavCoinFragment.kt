@@ -54,7 +54,7 @@ class FavCoinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         email = auth.currentUser!!.email!!
-        coinList = args.allCoin.coins
+        coinList = args?.allCoin?.coins ?: emptyList<CoinDataModel>().toMutableList()
         activityViewModel.setToolbarVisibility(true)
         activityViewModel.setBackIconVisibility(true)
 
@@ -101,10 +101,11 @@ class FavCoinFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.favCoins.observe(viewLifecycleOwner) {
-            binding.filterLayout.isVisible = true
-            binding.rvCoinList.isVisible = true
-            binding.tvError.isVisible = false
             it?.let {list ->
+                binding.rvCoinList.isVisible = true
+                binding.filterLayout.isVisible = list.isNotEmpty()
+                binding.tvError.isVisible = list.isEmpty()
+
                 adapter = CoinListAdapter(PageType.FAV)
                 adapter.setItems(list)
                 binding.rvCoinList.layoutManager = LinearLayoutManager(context,
@@ -120,17 +121,6 @@ class FavCoinFragment : Fragment() {
                 binding.tvError.isVisible = false
             } else {
                 binding.loading.isVisible = false
-            }
-
-        }
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            it?.let { message->
-                binding.filterLayout.isVisible = false
-                binding.tvError.text = message
-                binding.tvError.isVisible = true
-            } ?: run {
-                binding.rvCoinList.isVisible = true
-                binding.filterLayout.isVisible = true
             }
         }
     }

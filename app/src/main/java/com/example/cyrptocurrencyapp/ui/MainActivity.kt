@@ -1,6 +1,7 @@
 package com.example.cyrptocurrencyapp.ui
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.annotation.NavigationRes
@@ -33,6 +34,12 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         initToolbar()
         setupObserver()
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun initToolbar() {
@@ -55,26 +62,6 @@ class MainActivity : AppCompatActivity() {
             if (!it) {
                 binding.toolbar.navigationIcon = null
             }
-        }
-    }
-
-    private fun setGraph(
-        @NavigationRes navigationRes: Int,
-        @IdRes startDestination: Int = 0,
-        args: Bundle?= null
-    ) {
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
-        navController = navHostFragment.findNavController()
-        val graph = navController.navInflater.inflate(navigationRes)
-
-        if(startDestination != 0) {
-            graph.setStartDestination(startDestination)
-        }
-
-        if (args != null) {
-            navController.setGraph(graph, args)
-        } else {
-            navController.graph = graph
         }
     }
 }

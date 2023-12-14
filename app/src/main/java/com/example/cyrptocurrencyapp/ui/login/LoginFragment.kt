@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun initLayout() = with(binding) {
-        activityViewModel.setToolbarVisibility(true)
+        activityViewModel.setToolbarVisibility(false)
         activityViewModel.setBackIconVisibility(false)
         signIn.setOnClickListener {
             signIn()

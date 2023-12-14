@@ -21,11 +21,11 @@ class CoinListViewModel @Inject constructor(
     private var _allCoin = MutableLiveData<MutableList<CoinDataModel>>()
     val allCoin: LiveData<MutableList<CoinDataModel>> = _allCoin
 
+    private var _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+
     private var _isLoading = MutableLiveData<Boolean>(true)
     val isLoading: LiveData<Boolean> = _isLoading
-
-    private var _errorMessage = MutableLiveData<String>("")
-    val errorMessage: LiveData<String> = _errorMessage
 
 
     fun getAllCoin(page: String?) {
@@ -33,14 +33,16 @@ class CoinListViewModel @Inject constructor(
             getAllCoinUseCase.invoke(page).collect {
                 when (it) {
                     is ResponseState.Loading -> {
-
+                        _isLoading.postValue(true)
                     }
 
                     is ResponseState.Error -> {
-
+                        _isLoading.postValue(false)
+                        _errorMessage.postValue(it.errorMessage)
                     }
 
                     is ResponseState.Success -> {
+                        _isLoading.postValue(false)
                         _allCoin.postValue(it.data ?: mutableListOf())
                     }
                 }
