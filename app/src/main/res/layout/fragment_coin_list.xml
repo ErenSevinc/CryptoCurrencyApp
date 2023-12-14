@@ -9,30 +9,37 @@
 
     <TextView
         android:id="@+id/description_title"
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Welcome User. This is coin page. If you want to search coin, write coin symbol."
         android:textColor="@color/white"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/button_favourite"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Welcome User." />
 
     <Button
         android:id="@+id/button_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/accept_yellow"
-        android:text="Show Favourite"
+        android:text="Show Favourites"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/description_title"
+        app:layout_constraintTop_toBottomOf="@id/description_title"
+        app:layout_constraintStart_toStartOf="@id/description_title" />
+
+    <Button
+        android:id="@+id/button_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/bg_sign_out"
+        android:text="Sign Out"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/button_favourite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/description_title" />
+        app:layout_constraintBottom_toBottomOf="@id/button_favourite"/>
 
     <SearchView
         android:id="@+id/filterLayout"
@@ -46,7 +53,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description_title" />
+        app:layout_constraintTop_toBottomOf="@id/button_favourite" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_coin_list"

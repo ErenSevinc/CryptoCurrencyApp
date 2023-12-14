@@ -16,6 +16,9 @@ import com.example.cyrptocurrencyapp.databinding.FragmentCoinListBinding
 import com.example.cyrptocurrencyapp.presentation.adapter.CoinListAdapter
 import com.example.cyrptocurrencyapp.presentation.adapter.PageType
 import com.example.cyrptocurrencyapp.ui.MainViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,9 +26,15 @@ class CoinListFragment : Fragment() {
 
     private lateinit var binding: FragmentCoinListBinding
     private lateinit var adapter: CoinListAdapter
+    private lateinit var user: FirebaseAuth
     private val viewModel by viewModels<CoinListViewModel>()
     private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var coinList: MutableList<CoinDataModel>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        user = Firebase.auth
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,9 +56,15 @@ class CoinListFragment : Fragment() {
     private fun initLayout() {
         activityViewModel.setToolbarVisibility(true)
         setSearchView()
+        binding.descriptionTitle.text = "Welcome ${user.currentUser!!.displayName}"
 
         binding.buttonFavourite.setOnClickListener {
             val direction = CoinListFragmentDirections.navigateToFavCoin(CoinListDataModel(coinList))
+            findNavController().navigate(direction)
+        }
+        binding.buttonSignOut.setOnClickListener {
+            user.signOut()
+            val direction = CoinListFragmentDirections.navigateToSplash()
             findNavController().navigate(direction)
         }
     }

@@ -57,7 +57,7 @@
         style="?attr/materialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/bg_gray"
+        android:backgroundTint="@color/accept_yellow"
         android:layout_marginTop="24dp"
         android:textColor="@color/black"
         android:text="Sign In"

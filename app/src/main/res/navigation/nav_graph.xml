@@ -44,6 +44,9 @@
         <action
             android:id="@+id/navigateToFavCoin"
             app:destination="@id/favCoinFragment" />
+        <action
+            android:id="@+id/navigateToSplash"
+            app:destination="@id/splashFragment" />
     </fragment>
     <fragment
         android:id="@+id/coinDetailFragment"
