@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -50,12 +51,19 @@ class FavCoinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         email = auth.currentUser!!.email!!
         coinList = args.allCoin.coins
-        getFavourites()
         setupObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getFavourites()
     }
 
     private fun setupObservers() {
         viewModel.favCoins.observe(viewLifecycleOwner) {
+            binding.filterLayout.isVisible = true
+            binding.rvCoinList.isVisible = true
+            binding.tvError.isVisible = false
             it?.let {list ->
                 adapter = CoinListAdapter(PageType.FAV)
                 adapter.setItems(list)
@@ -64,8 +72,28 @@ class FavCoinFragment : Fragment() {
                 binding.rvCoinList.adapter = adapter
             }
         }
-    }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.loading.isVisible = true
+                binding.rvCoinList.isVisible = false
+                binding.filterLayout.isVisible = false
+                binding.tvError.isVisible = false
+            } else {
+                binding.loading.isVisible = false
+            }
 
+        }
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            it?.let { message->
+                binding.filterLayout.isVisible = false
+                binding.tvError.text = message
+                binding.tvError.isVisible = true
+            } ?: run {
+                binding.rvCoinList.isVisible = true
+                binding.filterLayout.isVisible = true
+            }
+        }
+    }
 
     private fun getFavourites() {
         db.collection(email).get().addOnCompleteListener { task->

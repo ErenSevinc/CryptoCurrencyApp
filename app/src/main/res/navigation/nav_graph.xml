@@ -16,7 +16,11 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/navigateToAllList"
-            app:destination="@id/coinListFragment" />
+            app:destination="@id/coinListFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
     </fragment>
 
     <fragment
@@ -32,7 +36,11 @@
         tools:layout="@layout/fragment_coin_list" >
         <action
             android:id="@+id/navigateToDetail"
-            app:destination="@id/coinDetailFragment" />
+            app:destination="@id/coinDetailFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left"
+            app:popEnterAnim="@anim/slide_from_left"
+            app:popExitAnim="@anim/slide_to_right" />
         <action
             android:id="@+id/navigateToFavCoin"
             app:destination="@id/favCoinFragment" />
@@ -67,7 +75,7 @@
         tools:layout="@layout/fragment_fav_coin" >
         <action
             android:id="@+id/navigateToDetailFromFav"
-            app:destination="@id/coinDetailFragment" />
+            app:destination="@id/coinDetailFragment"/>
         <argument
             android:name="allCoin"
             app:argType="com.example.cyrptocurrencyapp.data.model.CoinListDataModel" />

@@ -15,19 +15,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavCoinViewModel @Inject constructor(
-    private val getAllCoinUseCase: GetAllCoinUseCase
-) : ViewModel() {
+class FavCoinViewModel @Inject constructor() : ViewModel() {
     private var _favCoins = MutableLiveData<MutableList<CoinDataModel>>()
     val favCoins: LiveData<MutableList<CoinDataModel>> = _favCoins
 
     private var _isLoading = MutableLiveData<Boolean>(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private var _errorMessage = MutableLiveData<String>("")
-    val errorMessage: LiveData<String> = _errorMessage
-
-    val favDocument = MutableLiveData<QueryDocumentSnapshot?>(null)
+    private var _errorMessage = MutableLiveData<String?>(null)
+    val errorMessage: LiveData<String?> = _errorMessage
 
     fun checkFavourite(coinList: MutableList<CoinDataModel>, result: QuerySnapshot) {
         val list = mutableListOf<CoinDataModel>()
@@ -38,6 +34,12 @@ class FavCoinViewModel @Inject constructor(
                 }
             }
         }
+        _isLoading.value = false
+
+        if (list.isEmpty()) {
+            _errorMessage.postValue("You don't have favourite coin.")
+        }
         _favCoins.postValue(list)
+
     }
 }

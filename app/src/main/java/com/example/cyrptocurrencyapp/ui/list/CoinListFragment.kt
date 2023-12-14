@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.example.cyrptocurrencyapp.data.model.CoinListDataModel
 import com.example.cyrptocurrencyapp.databinding.FragmentCoinListBinding
 import com.example.cyrptocurrencyapp.presentation.adapter.CoinListAdapter
 import com.example.cyrptocurrencyapp.presentation.adapter.PageType
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class CoinListFragment : Fragment() {
     private lateinit var binding: FragmentCoinListBinding
     private lateinit var adapter: CoinListAdapter
     private val viewModel by viewModels<CoinListViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var coinList: MutableList<CoinDataModel>
 
     override fun onCreateView(
@@ -42,6 +45,7 @@ class CoinListFragment : Fragment() {
     }
 
     private fun initLayout() {
+        activityViewModel.setToolbarVisibility(true)
         setSearchView()
 
         binding.buttonFavourite.setOnClickListener {
