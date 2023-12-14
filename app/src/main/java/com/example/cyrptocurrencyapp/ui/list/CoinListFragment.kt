@@ -55,6 +55,7 @@ class CoinListFragment : Fragment() {
 
     private fun initLayout() {
         activityViewModel.setToolbarVisibility(true)
+        activityViewModel.setBackIconVisibility(false)
         setSearchView()
         binding.descriptionTitle.text = "Welcome ${user.currentUser!!.displayName}"
 

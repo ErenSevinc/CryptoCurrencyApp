@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.example.cyrptocurrencyapp.data.model.CoinDataModel
 import com.example.cyrptocurrencyapp.databinding.FragmentFavCoinBinding
 import com.example.cyrptocurrencyapp.presentation.adapter.CoinListAdapter
 import com.example.cyrptocurrencyapp.presentation.adapter.PageType
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,6 +29,7 @@ class FavCoinFragment : Fragment() {
     private lateinit var binding: FragmentFavCoinBinding
     private lateinit var adapter: CoinListAdapter
     private val viewModel by viewModels<FavCoinViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private val args: FavCoinFragmentArgs by navArgs()
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
@@ -51,12 +55,48 @@ class FavCoinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         email = auth.currentUser!!.email!!
         coinList = args.allCoin.coins
+        activityViewModel.setToolbarVisibility(true)
+        activityViewModel.setBackIconVisibility(true)
+
+        setSearchView()
         setupObservers()
     }
 
     override fun onResume() {
         super.onResume()
         getFavourites()
+    }
+
+    private fun setSearchView() {
+        binding.filterLayout.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.favCoins.value
+                }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val list = viewModel.favCoins.value ?: emptyList<CoinDataModel>().toMutableList()
+                newText?.let {
+                    if (it.isEmpty()) {
+                        adapter.setItems(list)
+                    } else if (it.length == 2) {
+
+                        val filteredCoin = list.filter { model ->
+                            model.symbol.contains(it, true)
+                        }.toMutableList()
+                        adapter.setItems(filteredCoin)
+                    } else if (it.length > 3) {
+
+                        val filteredCoin = list.filter { model ->
+                            model.name.contains(it, true)
+                        }.toMutableList()
+                        adapter.setItems(filteredCoin)
+                    }
+                }
+                return true
+            }
+        })
     }
 
     private fun setupObservers() {

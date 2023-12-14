@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cyrptocurrencyapp.databinding.FragmentRegisterBinding
-import com.example.cyrptocurrencyapp.ui.login.LoginFragmentDirections
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.userProfileChangeRequest
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
-    private val viewModel by viewModels<RegisterViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,8 @@ class RegisterFragment : Fragment() {
     }
 
     private fun initLayout() = with(binding) {
+        activityViewModel.setToolbarVisibility(true)
+        activityViewModel.setBackIconVisibility(true)
 
         register.setOnClickListener {
             register()

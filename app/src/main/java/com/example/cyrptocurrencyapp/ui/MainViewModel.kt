@@ -19,11 +19,14 @@ class MainViewModel @Inject constructor(
     private val getAllCoinUseCase: GetAllCoinUseCase
 ) : ViewModel() {
 
-    private val _title = MutableLiveData("Toolbarsss")
+    private val _title = MutableLiveData("Toolbar")
     val title: LiveData<String> = _title
 
     private val _isToolbarVisible = MutableLiveData(true)
     val isToolbarVisible: LiveData<Boolean> = _isToolbarVisible
+
+    private val _isToolbarNavIconVisibility = MutableLiveData(false)
+    val isToolbarNavIconVisibility: LiveData<Boolean> = _isToolbarNavIconVisibility
 
     fun setToolbarTitle(text: String) {
         _title.value = text
@@ -31,6 +34,10 @@ class MainViewModel @Inject constructor(
 
     fun setToolbarVisibility(isVisible: Boolean) {
         _isToolbarVisible.value = isVisible
+    }
+
+    fun setBackIconVisibility(isVisible: Boolean) {
+        _isToolbarNavIconVisibility.value = isVisible
     }
 
 

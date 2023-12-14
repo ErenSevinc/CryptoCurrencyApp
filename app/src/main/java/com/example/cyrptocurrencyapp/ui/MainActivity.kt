@@ -46,10 +46,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObserver() {
         viewModel.title.observe(this) {
-            binding.toolbar.title = it
+            title = it
         }
         viewModel.isToolbarVisible.observe(this) {
             binding.toolbar.isVisible = it
+        }
+        viewModel.isToolbarNavIconVisibility.observe(this) {
+            if (!it) {
+                binding.toolbar.navigationIcon = null
+            }
         }
     }
 

@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.cyrptocurrencyapp.R
 import com.example.cyrptocurrencyapp.databinding.FragmentCoinDetailBinding
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,6 +29,7 @@ class CoinDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentCoinDetailBinding
     private val viewModel by viewModels<CoinDetailViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private val args: CoinDetailFragmentArgs by navArgs()
 
     // TODO Timer
@@ -62,6 +65,9 @@ class CoinDetailFragment : Fragment() {
     }
 
     private fun initLayout() = with(binding) {
+        activityViewModel.setToolbarVisibility(true)
+        activityViewModel.setBackIconVisibility(true)
+
         favouriteButton.setOnClickListener {
             if (viewModel.isFav.value == true) {
                 dissFavourite()

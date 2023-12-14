@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.cyrptocurrencyapp.ui.login.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/navigateToRegister"
@@ -26,13 +26,13 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.cyrptocurrencyapp.ui.register.RegisterFragment"
-        android:label="fragment_register"
+        android:label="Register"
         tools:layout="@layout/fragment_register"/>
 
     <fragment
         android:id="@+id/coinListFragment"
         android:name="com.example.cyrptocurrencyapp.ui.list.CoinListFragment"
-        android:label="fragment_coin_list"
+        android:label="Coin List"
         tools:layout="@layout/fragment_coin_list" >
         <action
             android:id="@+id/navigateToDetail"
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/coinDetailFragment"
         android:name="com.example.cyrptocurrencyapp.ui.detail.CoinDetailFragment"
-        android:label="fragment_coin_detail"
+        android:label="Coin Detail"
         tools:layout="@layout/fragment_coin_detail" >
         <argument
             android:name="coinId"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.cyrptocurrencyapp.ui.splash.SplashFragment"
-        android:label="fragment_splash"
+        android:label="Splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/navigateToLogin"
@@ -74,7 +74,7 @@
     <fragment
         android:id="@+id/favCoinFragment"
         android:name="com.example.cyrptocurrencyapp.ui.list.favCoin.FavCoinFragment"
-        android:label="fragment_fav_coin"
+        android:label="Favourites"
         tools:layout="@layout/fragment_fav_coin" >
         <action
             android:id="@+id/navigateToDetailFromFav"
