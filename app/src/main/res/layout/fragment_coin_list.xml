@@ -1,25 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.list.CoinListFragment"
-    android:background="@color/bg_black">
+    android:background="@color/bg_black"
+    tools:context=".ui.list.CoinListFragment">
+
+    <TextView
+        android:id="@+id/description_title"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Welcome User. This is coin page. If you want to search coin, write coin symbol."
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/button_favourite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/accept_yellow"
+        android:text="Show Favourite"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/description_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/description_title" />
+
+    <SearchView
+        android:id="@+id/filterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_search_view"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@color/white"
+        android:queryHint="Search Coin"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/bg_black"
         android:id="@+id/rv_coin_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:overScrollMode="never"
-        tools:itemCount="6"
+        android:background="@color/bg_black"
         android:orientation="vertical"
-        tools:listitem="@layout/item_coin_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:overScrollMode="never"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterLayout"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_coin_list" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.cyrptocurrencyapp.databinding.FragmentSplashBinding
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -21,6 +23,7 @@ class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding
     private val viewModel by viewModels<SplashViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,10 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkLogin()
+    }
+
+    private fun initLayout() {
+        activityViewModel.setToolbarVisibility(false)
     }
 
     private fun checkLogin() {

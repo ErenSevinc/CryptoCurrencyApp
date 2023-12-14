@@ -37,6 +37,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun initLayout() = with(binding) {
+
         register.setOnClickListener {
             register()
         }
@@ -53,7 +54,7 @@ class RegisterFragment : Fragment() {
                     displayName = name
                 }
                 auth.currentUser?.updateProfile(profileUpdates)
-                Toast.makeText(requireContext(),"Wlcome $name",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"Welcome $name",Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
             } else {
                 Toast.makeText(requireContext(),"Error",Toast.LENGTH_LONG).show()

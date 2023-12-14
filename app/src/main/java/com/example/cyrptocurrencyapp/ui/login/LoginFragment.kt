@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cyrptocurrencyapp.R
 import com.example.cyrptocurrencyapp.databinding.FragmentCoinDetailBinding
 import com.example.cyrptocurrencyapp.databinding.FragmentLoginBinding
+import com.example.cyrptocurrencyapp.ui.MainViewModel
 import com.example.cyrptocurrencyapp.ui.detail.CoinDetailViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,6 +25,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel by viewModels<LoginViewModel>()
+    private val activityViewModel by activityViewModels<MainViewModel>()
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun initLayout() = with(binding) {
+        activityViewModel.setToolbarVisibility(false)
         signIn.setOnClickListener {
             signIn()
         }

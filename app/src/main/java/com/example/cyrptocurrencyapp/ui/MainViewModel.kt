@@ -19,32 +19,19 @@ class MainViewModel @Inject constructor(
     private val getAllCoinUseCase: GetAllCoinUseCase
 ) : ViewModel() {
 
-    private var _allCoin = MutableLiveData<MutableList<CoinDataModel>>()
-    val allCoin: LiveData<MutableList<CoinDataModel>> = _allCoin
+    private val _title = MutableLiveData("Toolbarsss")
+    val title: LiveData<String> = _title
 
-    private var _isLoading = MutableLiveData<Boolean>(true)
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _isToolbarVisible = MutableLiveData(true)
+    val isToolbarVisible: LiveData<Boolean> = _isToolbarVisible
 
-    private var _errorMessage = MutableLiveData<String>("")
-    val errorMessage: LiveData<String> = _errorMessage
-
-
-    fun getAllCoin(page: String?) {
-        viewModelScope.launch(Dispatchers.IO) {
-            getAllCoinUseCase.invoke(page).collect {
-                when(it) {
-                    is ResponseState.Loading -> {
-
-                    }
-                    is ResponseState.Error -> {
-
-                    }
-                    is ResponseState.Success -> {
-                        _allCoin.postValue(it.data?: mutableListOf())
-                    }
-                }
-            }
-        }
+    fun setToolbarTitle(text: String) {
+        _title.value = text
     }
+
+    fun setToolbarVisibility(isVisible: Boolean) {
+        _isToolbarVisible.value = isVisible
+    }
+
 
 }
