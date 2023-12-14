@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -52,11 +53,14 @@ class SplashFragment : Fragment() {
 
     private fun checkLogin() {
         lifecycleScope.launch {
+            binding.loading.isVisible = true
             delay(2000L)
             if (auth.currentUser != null) {
+                binding.loading.isVisible = false
                 val direction = SplashFragmentDirections.navigateToCoinList()
                 findNavController().navigate(direction)
             } else {
+                binding.loading.isVisible = false
                 val direction = SplashFragmentDirections.navigateToLogin()
                 findNavController().navigate(direction)
             }
